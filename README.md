@@ -25,34 +25,49 @@ Node: node object
 
 ## Example
 \# import libraries
+
 from sklearn import datasets
+
 iris = datasets.load_iris()
+
 import numpy as np
+
 import pandas as pd
+
 from sklearn.model_selection import train_test_split
+
 from sklearn.metrics import classification_report, accuracy_score
 
 \# import data
+
 X = iris.data
+
 y = iris.target
 
 \# split train and test samples
+
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 33)
 
 \# create a classification tree
+
 cdt = ClassificationTree(max_depth = 3, min_samples_leaf = 3, criterion = "misclassification_error")
 
 \# fit the tree
+
 cdt.fit(X_train, y_train)
 
-\# make prediction on test set
+\# make prediction on test 
+
 y_pred = cdt.predict(X_test)
 
 \# calculate accuracy score
+
 cdt.acc_score(y_pred, y_test)
 
 \# print classification report
+
 print(classification_report(y_test, y_pred))
 
 \# predict probabilities of each class for each sample
+
 prob_pred = cdt.predict_probability(X_test)
