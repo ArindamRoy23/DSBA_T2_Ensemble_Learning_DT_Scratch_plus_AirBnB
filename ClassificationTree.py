@@ -29,15 +29,43 @@ class ClassificationTree:
                 n_classes_: number of classes in training set 
                 n_features_: number of features in training set and test set
                 n_samples_: number of samples
-                criterion: criterion to split a node. Chosen from "gini", "cross_entropy" and "isclassification_error"
+                criterion: criterion to split a node. Chosen from "gini", "cross_entropy" and "misclassification_error"
                 tree_: tree class
                 
             Methods:
-                __init__: constructor, build a Classifiactiopn Tree class
+                __init__(max_deoth = None, min_samples_leaf = 1, min_samples_split = 2, criterion = "gini"):
+                        constructor, build a Classifiactiopn Tree class
                 fit(X,y): fit the training set data
                 predict(X): predict classes for test data using trained parameters
                 predict_probability(X): predict probabilities for test data
                 acc_score: print the accuracy score of the tree model
+            
+            Exmaple:
+            
+                from sklearn import datasets
+                iris = datasets.load_iris()
+                import numpy as np
+                import pandas as pd
+                from sklearn.model_selection import train_test_split
+                from sklearn.metrics import classification_report, accuracy_score
+                # import data
+                X = iris.data
+                y = iris.target
+                # split train and test samples
+                X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state = 33)
+                # create a classification tree
+                cdt = ClassificationTree(max_depth = 3, min_samples_leaf = 3, criterion = "misclassification_error")
+                # fit the tree
+                cdt.fit(X_train, y_train)
+                # make prediction on test set
+                y_pred = cdt.predict(X_test)
+                # calculate accuracy score
+                cdt.acc_score(y_pred, y_test)
+                # print classification report
+                print(classification_report(y_test, y_pred))
+                # predict probabilities of each class for each sample
+                prob_pred = cdt.predict_probability(X_test)
+            
     """
     
     def __init__(self, max_depth=None, min_samples_leaf=1, min_samples_split=2, criterion = "gini"):
@@ -51,7 +79,7 @@ class ClassificationTree:
         """
             Build the decision tree recursively using the training data
             Syntax: ClassificationTree.fit(X,y)
-            Inputs: X: n_samples_ by n_features_ numpy array; y: n_samples_ numpy array
+            Inputs: X: n_samples_ by n_features_ matrix or dataframe; y: n_samples_
             Output: build a ClassificationTree object
         """
         self.n_features_ = X.shape[1]
@@ -64,8 +92,8 @@ class ClassificationTree:
         """
             Predict the class labels of new data using the trained decision tree
             Syntax: ClassificationTree.predict(X)
-            Input: X: n_samples_ by n_features_ numpy array
-            Output: a numpy array with n_samples_ rows, indicating the predicted classes of that sample
+            Input: X: n_samples_ by n_features_ matrix or dataframe
+            Output: a vector with n_samples_ rows, indicating the predicted classes of that sample
         """
         return [self._predict(inputs) for inputs in X]
     
@@ -73,8 +101,8 @@ class ClassificationTree:
         """
             Predict the class probabilities of new data using the trained decision tree
             Syntax: ClassificationTree.predict_probability(X)
-            Input: X: n_samples_ by n_features_ numpy array
-            Output: n_samples_ by n_classes_ numpy array, each column indicates the probability of that class
+            Input: X: n_samples_ by n_features_ matrix or dataframe
+            Output: n_samples_ by n_classes_ matrix, each column indicates the probability of that class
         """
         return [self._predict_probability(inputs) for inputs in X]
     
@@ -145,6 +173,7 @@ class ClassificationTree:
         left_entropy = self._entropy(left_labels)
         right_entropy = self._entropy(right_labels)
         child_entropy = (len(left_labels) / len(y)) * left_entropy + (len(right_labels) / len(y)) * right_entropy
+        # average entropy for child nodes
         
         information_gain = parent_entropy - child_entropy
         return information_gain
@@ -153,13 +182,15 @@ class ClassificationTree:
         # Calculate the entropy of a set of labels
         _, counts = np.unique(y, return_counts=True)
         p = counts / len(y)  
-        if self.criterion == 'gini':
+        print(p)
+        if self.criterion == 'gini':   # gini coefficient
             return 1 - np.sum(p ** 2)
-        elif self.criterion == 'crossentropy':
-            return -np.sum(p * np.log2(p))
-        # elif self.criterion == 'misclassifcation_error'
+        elif self.criterion == 'crossentropy':   # cross entropy
+            return -np.sum(p * np.log2(p+1e-6))
+        elif self.criterion == 'misclassification_error':   # misclassification error
+            return 1 - np.max(p)
         else:
-            raise ValueError('Invalid criterion, Select from "gini", "crossentropy"')
+            raise ValueError('Invalid criterion, Select from "gini", "crossentropy" or "misclassification_error"')
     
     def _most_common_label(self, y):
         # Find the most common label in a set of labels
@@ -195,7 +226,7 @@ class ClassificationTree:
         proba = np.zeros(self.n_classes_)
         total_samples = len(node.label_freq)
         for class_idx in range(self.n_classes_):
-            class_count = sum(node.label_freq==class_idx)
+            class_count = np.sum(node.label_freq==class_idx)
             proba[class_idx] = class_count / total_samples
         
         return proba
@@ -216,8 +247,8 @@ class ClassificationTree:
                 conf_matrix[y_true[i]][y_pred[i]] += 1
 
             # Calculate the accuracy
-            total = sum(sum(conf_matrix))
-            correct = sum([conf_matrix[i][i] for i in range(n_classes)])
+            total = np.sum(np.sum(conf_matrix))
+            correct = np.sum([conf_matrix[i][i] for i in range(n_classes)])
             acc = correct / total
             print('The accuracy socre is: % .3f' % acc)
             return round(acc,3)
