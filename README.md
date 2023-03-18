@@ -50,3 +50,8 @@ The class DecisionTreeRegressor contains several methods to build and train the 
 The best_split method finds the best feature and threshold for splitting the data based on the mean squared error cost function. The meansqerror method calculates the mean squared error of the data.
 
 Note that this implementation does not handle categorical data. This can be a future scope of improvement.
+
+
+# Project Contributors:
+
+Arindam Roy, Chara Vega Brown, Jiayi Wu, Taolue CHEN, Marouan Jouaidi
