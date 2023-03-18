@@ -2,11 +2,11 @@
 
 Classification Tree from Scratch: Build and train a Decision Tree for classifiaction tasks.
 
-Classes:
+## Classes:
 Classification Tree: binary classification tree object
 Node: node object
 
-Attributes:
+## Attributes:
 1. max_depth: max depth of the tree (stop criterion)
 2. min_samples_leaf: minimum number of samples per lieaf  (stop criterion)
 3. min_samples_split: minimum number of samples to split a node (not leaves, also a stop criterion)
@@ -16,7 +16,7 @@ Attributes:
 7. criterion: criterion to split a node. Chosen from "gini", "cross_entropy" and "isclassification_error"
 8. tree_: tree class
 
-Methods:
+## Methods:
 1. __init__: constructor, build a Classifiactiopn Tree class
 2. fit(X,y): fit the training set data
 3. predict(X): predict classes for test data using trained parameters
