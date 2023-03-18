@@ -17,7 +17,7 @@ Node: node object
 8. tree_: tree class
 
 ## Methods:
-1. __init__: constructor, build a Classifiactiopn Tree class
+1. __init__(max_depth, min_samples_leaf, min_samples_split, criterion = "gini"): constructor, build a Classifiactiopn Tree class
 2. fit(X,y): fit the training set data
 3. predict(X): predict classes for test data using trained parameters
 4. predict_probability(X): predict probabilities for test data
