@@ -32,7 +32,7 @@ Node: node object
 4. n_classes_: number of classes in training set 
 5. n_features_: number of features in training set and test set
 6. n_samples_: number of samples
-7. criterion: criterion to split a node. Chosen from "gini", "cross_entropy" and "isclassification_error"
+7. criterion: criterion to split a node. Chosen from "gini", "cross_entropy" and "misclassification_error"
 8. tree_: tree class
 
 ## Methods:
