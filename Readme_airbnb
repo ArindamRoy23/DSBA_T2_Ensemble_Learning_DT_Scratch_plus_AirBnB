@@ -1,0 +1,9 @@
+The data set used in this project showcases the
+Airbnb listings and their features in New York City
+between the years 2011 and 2019. It includes a
+comprehensive collection of information pertaining
+to hosts, geographical locations, room features, and
+pricing. The primary objective of this task is to
+employ ensemble learning techniques to predict the
+houses prices. In this report, we will first perform descriptive analysis on the data set followed by a preparation of our data-frame to then after explore the use
+of various ensemble learning methods and their application in solving this regression problem.
