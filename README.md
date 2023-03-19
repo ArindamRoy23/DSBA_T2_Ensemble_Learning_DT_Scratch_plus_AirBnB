@@ -17,7 +17,7 @@ After cloning the repository, you can run the code by navigating to the director
 python test.py
 
 
-# Classifiaction-Tree-from-Scratch
+# Classifiaction Tree from Scratch
 
 Classification Tree from Scratch: Build and train a Decision Tree for classifiaction tasks.
 
@@ -32,7 +32,7 @@ Node: node object
 4. n_classes_: number of classes in training set 
 5. n_features_: number of features in training set and test set
 6. n_samples_: number of samples
-7. criterion: criterion to split a node. Chosen from "gini", "cross_entropy" and "isclassification_error"
+7. criterion: criterion to split a node. Chosen from "gini", "crossentropy" and "misclassification_error"
 8. tree_: tree class
 
 ## Methods:
@@ -50,6 +50,23 @@ The class DecisionTreeRegressor contains several methods to build and train the 
 The best_split method finds the best feature and threshold for splitting the data based on the mean squared error cost function. The meansqerror method calculates the mean squared error of the data.
 
 Note that this implementation does not handle categorical data. This can be a future scope of improvement.
+
+## Classes
+Regression Tree: binary regression tree object
+
+Node: node object
+
+## Attributes
+1. max_depth: an integer that represents the maximum depth of the decision tree. If None, the tree will be grown until all leaves are pure or until each leaf has fewer samples than min_samples_split.
+2. min_samples_split: an integer that represents the minimum number of samples required to split an internal node. If a node has fewer samples than min_samples_split, it will not be split, and the algorithm will terminate for that node.
+3. root: a reference to the root node of the decision tree. This attribute is set to None when an instance of DecisionTreeRegressor is initialized, and it is set to the root node of the trained decision tree when the fit method is called.
+
+## Methods
+1. __init__(self, max_depth=None, min_samples_split=2): The constructor method that initializes the hyperparameters of the decision tree regressor.
+2. fit(self, X, y): This method fits the input data X and the target labels y to the decision tree.
+3. tree_build(self, X, y, depth=0): This is a recursive method that builds the decision tree. It first checks if the stopping criteria has been met (i.e., if the maximum depth or minimum number of samples required to split has been reached). If not, it finds the best feature and threshold to split on using the best_split method, and splits the data into left and right subsets. It then recursively builds the left and right subtrees by calling itself with the left and right subsets. Finally, it returns a Node object that stores the feature, threshold, and left and right child nodes.
+4. best_split(self, X, y): This method finds the best feature and threshold for splitting the data X and labels y based on the mean squared error (MSE) cost function. It loops over all features and thresholds in X to find the best split that minimizes the sum of the MSE of the left and right subsets. If no good split is found, best_feature and best_threshold are set to None.
+5. meansqerror(self, y): This method calculates the mean squared error (MSE) of the input target labels y.
 
 
 # Project Contributors:

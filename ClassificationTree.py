@@ -29,7 +29,7 @@ class ClassificationTree:
                 n_classes_: number of classes in training set 
                 n_features_: number of features in training set and test set
                 n_samples_: number of samples
-                criterion: criterion to split a node. Chosen from "gini", "cross_entropy" and "misclassification_error"
+                criterion: criterion to split a node. Chosen from "gini", "crossentropy" and "misclassification_error"
                 tree_: tree class
                 
             Methods:
