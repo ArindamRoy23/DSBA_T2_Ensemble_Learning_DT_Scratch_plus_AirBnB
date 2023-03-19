@@ -17,7 +17,7 @@ After cloning the repository, you can run the code by navigating to the director
 python test.py
 
 
-# Classifiaction-Tree-from-Scratch
+# Classifiaction Tree from Scratch
 
 Classification Tree from Scratch: Build and train a Decision Tree for classifiaction tasks.
 
@@ -50,6 +50,14 @@ The class DecisionTreeRegressor contains several methods to build and train the 
 The best_split method finds the best feature and threshold for splitting the data based on the mean squared error cost function. The meansqerror method calculates the mean squared error of the data.
 
 Note that this implementation does not handle categorical data. This can be a future scope of improvement.
+
+## Classes
+
+
+## Attributes
+
+
+## Methods
 
 
 # Project Contributors:
