@@ -23,6 +23,7 @@ Classification Tree from Scratch: Build and train a Decision Tree for classifiac
 
 ## Classes:
 Classification Tree: binary classification tree object
+
 Node: node object
 
 ## Attributes:
