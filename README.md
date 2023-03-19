@@ -53,6 +53,7 @@ Note that this implementation does not handle categorical data. This can be a fu
 
 ## Classes
 Regression Tree: binary regression tree object
+
 Node: node object
 
 ## Attributes
