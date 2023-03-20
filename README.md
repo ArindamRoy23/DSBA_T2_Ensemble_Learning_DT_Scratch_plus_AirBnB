@@ -69,6 +69,30 @@ Node: node object
 4. best_split(self, X, y): This method finds the best feature and threshold for splitting the data X and labels y based on the mean squared error (MSE) cost function. It loops over all features and thresholds in X to find the best split that minimizes the sum of the MSE of the left and right subsets. If no good split is found, best_feature and best_threshold are set to None.
 5. meansqerror(self, y): This method calculates the mean squared error (MSE) of the input target labels y.
 
+# Airbnb Price Prediction
+
+## Project description
+
+The data set used in this project showcases the Airbnb listings and their features in New York City in 2019. 
+
+It includes a comprehensive collection of information pertaining to hosts, geographical locations, room features, and pricing. 
+
+The primary objective of this task is to employ ensemble learning techniques to predict the houses prices. 
+
+In this report, we will first perform descriptive analysis on the data set followed by a preparation of our data-frame to then after explore the use
+of various ensemble learning methods and their application in solving this regression problem.
+
+## Feature Engineering
+1. Filling missing values
+2. Converting date type
+3. Add new features on the skewed features
+4. One-hot encoding
+5. Normalization
+
+## Models
+Models used in this project including: Decision Tree, Random Forest, AdaBoost, Gradient Boosting and XGBoost. 
+
+The hyperparameters are tuned based on 3-fold cross validation. The main metrics we use for evaluation are MAE(Mean Absolute Error), RMSE(Root Mean Squared Error) and R2 score. 
 
 # Project Contributors:
 
